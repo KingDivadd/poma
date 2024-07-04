@@ -93,8 +93,8 @@ const signIn = asyncHandler(async(req, res) => {
         const find_auth = await Auth.findOne({ userId: user_id });
 
         if (find_auth && (await bcrypt.compare(password, find_auth.password))) {
-            const token = generateToken({ id: user_exist._id, userName: user_exist.user_name, role: user_exist.role });
-            return res.status(StatusCodes.OK).json({ msg: 'Login successful', user: user_exist, token });
+
+            return res.status(StatusCodes.OK).json({ msg: 'Login successful', user: user_exist });
         } else {
             return res.status(StatusCodes.UNAUTHORIZED).json({ err: 'Incorrect password, check password and try again!!!' });
         }
